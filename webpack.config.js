@@ -10,7 +10,7 @@ if(process.env.DEV_BUILD){
 module.exports = {
     entry: './project/frontend/src/index.js',
     output:{
-        filename: '[name].[hash].js',
+        filename: '[name].js',
         path: path.resolve(__dirname+'/project/frontend/static/frontend/')
     },
     devtool: devtools,
@@ -44,12 +44,8 @@ module.exports = {
         ]
     },
     plugins: [
-      new HTMLWebpackPlugin({
-          title:'You Got Appoint!',
-          template: path.resolve(__dirname+ './project/frontend/templates/frontend/index.html'),
-      }),
       new miniCssExtractPlugin({
-          filename: '[name].[hash].css',
+          filename: '[name].css',
           chunkFilename: '[id].css'
       })
   ]

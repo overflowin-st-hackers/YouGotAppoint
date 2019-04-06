@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import key from "weak-key";
 // import HomePage from './homepage';
 // import DashBoard from './dashboard';
 
@@ -44,16 +45,16 @@ class App extends Component{
         //     {this.state.userLoggedIn? <HomePage/> : <DashBoard />}
         // </userContext.Provider>)
         return (<>
-            {this.state.doctors.map((doctor)=>{
-                <div> 
+            {this.state.doctors===undefined?"No Data":this.state.doctors.map((doctor)=>(
+                <div key={doctor.pk}> 
                     <p> Name: {doctor.name} </p>
                     <p> contact: {doctor.contact_no}</p>
-                    <p> Specializations: <ul> {doctor.specializations.map((specialization)=>{<li> specialization </li>})} </ul> </p>
+                    <div> Specializations: <ul> {doctor.specializations.map((specialization)=>(<li key={key({spec: specialization})}> {specialization} </li>))} </ul> </div>
                     <p> Rating: {doctor.rating} </p>
                     <p> Degrees: {doctor.degrees} </p>
                     <p></p>
                 </div>
-            })}
+        ))}
         </>)
     }
 
