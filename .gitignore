@@ -6,7 +6,9 @@
 /staticfiles/*
 /mediafiles/*
 __pycache__/
-
+db.sqlite3
+.vscode
+migrations/
 # coverage result
 .coverage
 /coverage/
