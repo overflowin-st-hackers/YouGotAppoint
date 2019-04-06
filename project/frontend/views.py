@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Doctor
 from .serializers import DoctorSerializer
+from django.shortcuts import render
 
 @api_view(['GET'])
 def get_doctors(request):
@@ -25,3 +26,6 @@ def get_doctor(request, pk):
         return Response(serializer.data)
     
     return Response({})    
+
+def home(request):
+    return render(request, 'frontend/index.html')
