@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Doctor(models.Model):
     name = models.CharField(max_length=100)
@@ -18,3 +18,9 @@ class Specialization(models.Model):
     def __str__(self):
         return self.disease
 
+class Appointment(models.Model):
+    doctor = models.ForeignKey(Doctor, related_name='appointments', on_delete=models.CASCADE)
+    patient = models.ForeignKey(User, related_name='appointments', on_delete=models.CASCADE)
+    date = models.DateField()
+    time = models.TimeField()
+    duration = models.DurationField()
