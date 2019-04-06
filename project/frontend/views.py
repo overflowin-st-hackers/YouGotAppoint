@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Doctor
-from .serializers import DoctorSerializer, UserSerializer
+from .serializers import DoctorSerializer, UserSerializer, CurrentUserSerializer
 from django.shortcuts import render
 from django.contrib.auth.models import User
 
@@ -29,15 +29,6 @@ def get_doctor(request, pk):
     return Response({})   
 
 @api_view(['GET'])
-def get_users(request):
-    
-    if request.method == 'GET':
-        docs = User.objects.all()
-        serializer = UserSerializer(docs, many=True)
-        return Response(serializer.data)
-    return Response({})
-
-@api_view(['GET'])
 def get_user(request, pk):
     try:
         doc = User.objects.get(pk=pk)
@@ -46,10 +37,16 @@ def get_user(request, pk):
 
     if request.method == 'GET':
         serializer = UserSerializer(doc)
+
+        if request.user == doc
         return Response(serializer.data)
     
     return Response({})    
 
+@api_view(['GET'])
+def get_current_user(request):
+    user = CurrentUserSerializer(request.user)    
+    return Response(user.data) 
 
 def home(request):
     return render(request, 'frontend/index.html')

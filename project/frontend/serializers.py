@@ -9,7 +9,7 @@ class AppointmentSerializer1(serializers.ModelSerializer):
         fields = ('date', 'time', 'duration', 'patient')
 
 class AppointmentSerializer2(serializers.ModelSerializer):
-    
+
     class Meta:
         model = Appointment
         fields = ('date', 'time', 'duration', 'doctor')
@@ -29,3 +29,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'appointments')
+
+class CurrentUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('pk','username')
